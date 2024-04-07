@@ -1,9 +1,15 @@
 from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-# Konfiguracja aplikacji Flask i bazy danych
+# Zainstaluj pymysql i użyj go jako sterownika bazy danych
+import pymysql
+pymysql.install_as_MySQLdb()
+
+# Konfiguracja aplikacji Flask
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://test:test@localhost/warehouse_db'
+
+# Konfiguracja bazy danych za pomocą SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:LuckyFrytki123!@localhost/warehouse_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Wyłączanie śledzenia zmian (opcjonalne)
 db = SQLAlchemy(app)
 
