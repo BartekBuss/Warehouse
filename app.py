@@ -1,16 +1,14 @@
 from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
-
-# Zainstaluj pymysql i użyj go jako sterownika bazy danych
 import pymysql
 pymysql.install_as_MySQLdb()
 
-# Konfiguracja aplikacji Flask
+# Configuration Flask app
 app = Flask(__name__)
 
-# Konfiguracja bazy danych za pomocą SQLAlchemy
+# Configuring DB with SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:LuckyFrytki123!@localhost/warehouse_db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Wyłączanie śledzenia zmian (opcjonalne)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Define Product Model
@@ -27,7 +25,7 @@ class Product(db.Model):
 with app.app_context():
     db.create_all()
 
-# Endpoint do testowania połączenia frontendu z backendem
+# Endpoint to test connection frontend-backend
 @app.route('/api/test', methods=['GET'])
 def test_connection():
     return jsonify({"message": "Połączenie z backendem zostało nawiązane poprawnie! Betoniarzu!"})
@@ -86,9 +84,9 @@ def modify_product(id):
 # Endpoint for handling the main page
 @app.route('/')
 def index():
-    # Pobranie wszystkich produktów z bazy danych
+    # Downloading all products from DB
     products = Product.query.all()
-    # Renderowanie pliku HTML z przekazaniem produktów jako argumentu
+    # Rendering website with arguments from DB
     return render_template('index.html', products=products)
 
 if __name__ == '__main__':
