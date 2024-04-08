@@ -13,14 +13,16 @@
         <input type="text" id="productName" placeholder="Nazwa produktu">
         <input type="number" id="productQuantity" placeholder="Ilość">
         <input type="number" id="productPrice" placeholder="Cena">
+        <input type="text" id="productType" placeholder="Typ">
         <button onclick="addProduct()">Dodaj produkt</button>
+        <h4 id="legend">Nazwa - ilość - cena - typ</h4>
         <ul id="productList">
             {% for product in products %}
             <li>
-                <span>{{ product.name }} - {{ product.quantity }} - {{ product.price }}</span>
-                <div>
-                    <button onclick="deleteProduct({{ product.id }})">Usuń</button>
-                    <button onclick="modifyProduct({{ product.id }})">Edytuj</button>
+                <span>{{ product.name }} - {{ product.quantity }} - {{ product.price }} - {{ product.type }}</span>
+                <div class="button-container">
+                    <button class="modifyButton" onclick="deleteProduct({{ product.id }})">Usuń</button>
+                    <button class="modifyButton" onclick="modifyProduct({{ product.id }})">Edytuj</button>
                 </div>
             </li>
             {% endfor %}
