@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
 #pyjwt
 #user sie loguje (formatka do logowania i rejestracji), po logowaniu backend zwraca token któy za pisujesz w cookies albo localstorage 
-#za każdym razem jak chcesz coś zmienić w bazie, sprawdzic czy request jest autoryzowany #
-#bez użycia GPT masz 2 opcje: 
+#za każdym razem jak chcesz coś zmienić w bazie, sprawdzic czy request jest autoryzowany
+#2 opcje: 
 #- zrobić w html modal  i JS wyświetlić że błędnme dane
 #-import bootstrap i wyświetlenie modala 
