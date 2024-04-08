@@ -28,7 +28,7 @@ async function addProduct() {
                     type: productType
                 })
             });
-            fetchProducts(); // Fetch and display products after adding
+            fetchProducts();
             document.getElementById('productName').value = '';
             document.getElementById('productQuantity').value = '';
             document.getElementById('productPrice').value = '';
@@ -45,7 +45,7 @@ async function deleteProduct(id) {
             method: 'DELETE'
             
         });
-        fetchProducts(); // Fetch and display products after deletion
+        fetchProducts();
     } catch (error) {
         console.error('Błąd usuwania produktu:', error);
     }
@@ -65,7 +65,7 @@ async function modifyProduct(id) {
                 },
                 body: JSON.stringify({ quantity: newQuantity, price: newPrice, type: newType })
             });
-            fetchProducts(); // Fetch and display products after modification
+            fetchProducts();
         } catch (error) {
             console.error('Błąd modyfikacji produktu:', error);
         }

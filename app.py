@@ -4,16 +4,13 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 
-# Configuration Flask app
 app = Flask(__name__)
 
-# Configuring DB with SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:LuckyFrytki123!@localhost/warehouse_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-# Define Product Model
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -25,18 +22,15 @@ class Product(db.Model):
         return f"Product(name={self.name}, quantity={self.quantity}, price={self.price}, type={self.type})"
 
 
-# Create or Update the database schema
 with app.app_context():
     db.create_all()
 
 
-# Endpoint to test connection frontend-backend
 @app.route('/api/test', methods=['GET'])
 def test_connection():
-    return jsonify({"message": "Połączenie z backendem zostało nawiązane poprawnie! Betoniarzu!"})
+    return jsonify({"message": "Połączenie z backendem zostało nawiązane poprawnie!"})
 
 
-# Endpoint for retrieving the list of products
 @app.route('/api/products', methods=['GET'])
 def get_products():
     products = Product.query.all()
@@ -44,7 +38,6 @@ def get_products():
     return jsonify(product_list)
 
 
-# Endpoint for adding a new product
 @app.route('/api/products', methods=['POST'])
 def add_product():
     data = request.json
@@ -61,7 +54,6 @@ def add_product():
         return jsonify({"error": "Missing required fields"}), 400
 
 
-# Endpoint for deleting a product
 @app.route('/api/products/<int:id>', methods=['DELETE'])
 def delete_product(id):
     product = Product.query.get(id)
@@ -73,7 +65,6 @@ def delete_product(id):
         return jsonify({"error": "Product not found"}), 404
 
 
-# Endpoint for modifying a product
 @app.route('/api/products/<int:id>', methods=['PUT'])
 def modify_product(id):
     data = request.json
@@ -94,14 +85,20 @@ def modify_product(id):
         return jsonify({"error": "Missing required fields"}), 400
 
 
-# Endpoint for handling the main page
 @app.route('/')
 def index():
-    # Downloading all products from DB
     products = Product.query.all()
-    # Rendering website with arguments from DB
     return render_template('index.html', products=products)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+#pyjwt
+#user sie loguje (formatka do logowania i rejestracji), po logowaniu backend zwraca token któy za pisujesz w cookies albo localstorage 
+#za każdym razem jak chcesz coś zmienić w bazie, sprawdzic czy request jest autoryzowany #
+#bez użycia GPT masz 2 opcje: 
+#- zrobić w html modal  i JS wyświetlić że błędnme dane
+#-import bootstrap i wyświetlenie modala 
