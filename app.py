@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -21,6 +21,14 @@ class Product(db.Model):
     def __repr__(self):
         return f"Product(name={self.name}, quantity={self.quantity}, price={self.price}, type={self.type})"
 
+
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    login = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    
+    def __repr__(self):
+        return f"Users(login={self.login}, password={self.password})"
 
 with app.app_context():
     db.create_all()
@@ -91,6 +99,25 @@ def index():
     return render_template('index.html', products=products)
 
 
+@app.route('/api/users/', methods=['GET'])
+def check_user():
+    login = request.args.get('login')
+    password = request.args.get('password')
+    
+    if login is None or password is None:
+        return jsonify({"error": "Login and password are required"}), 400
+    
+    user = Users.query.filter_by(login=login, password=password).first()
+    
+    if user:
+        return jsonify({"message": "User exists"}), 200
+    else:
+        return jsonify({"message": "User not found"}), 404
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
@@ -101,4 +128,4 @@ if __name__ == '__main__':
 #za każdym razem jak chcesz coś zmienić w bazie, sprawdzic czy request jest autoryzowany
 #2 opcje: 
 #- zrobić w html modal  i JS wyświetlić że błędnme dane
-#-import bootstrap i wyświetlenie modala 
+#-import bootstrap i wyświetlenie modala  

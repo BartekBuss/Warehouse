@@ -1,3 +1,4 @@
+
 async function fetchProducts() {
     try {
         const response = await fetch('/api/products');
@@ -82,13 +83,46 @@ function displayProducts(products) {
         li.innerHTML = `
             <span>${product.name} - ${product.quantity} - ${product.price } - ${product.type}</span>
             <div class="button-container">
-                <button class="modifyButton" onclick="deleteProduct({{ product.id }})">Usuń</button>
-                <button class="modifyButton" onclick="modifyProduct({{ product.id }})">Edytuj</button>
+                <button class="modifyButton" onclick="deleteProduct(${product.id})">Usuń</button>
+                <button class="modifyButton" onclick="modifyProduct(${product.id})">Edytuj</button>
             </div>
         `;
         productList.appendChild(li);
     });
 }
+
+
+async function checkUser() {
+
+        var login = document.getElementById('loginInput').value;
+        var password = document.getElementById('passwordInput').value;
+
+        try {
+            const response = await fetch('api/users/?login=' + encodeURIComponent(login) + '&password=' + encodeURIComponent(password));
+            if (!response.ok) {
+                throw new Error('Błąd połączenia');
+            }
+            const data = await response.json();
+
+            //nie działa gówno lokalnie
+            window.location.href = "warehouse.html"
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert("Zły login lub hasło");
+        }
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loginButton = document.getElementById('loginButton');
+    if(loginButton) {
+        loginButton.addEventListener('click', function() {
+            checkUser();
+        });
+    }
+});
+
 
 window.onload = function () {
     fetchProducts();

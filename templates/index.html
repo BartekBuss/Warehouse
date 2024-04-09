@@ -14,61 +14,35 @@
 
         <h1>Magazyn</h1>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Zaloguj się, aby kontynuować</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Zaloguj się, aby kontynuować</button>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel">Logowanie</h4>
+                  <h4 class="modal-title" id="loginModalLabel">Logowanie</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
                   <form>
                     <div class="form-group">
-                      <label for="recipient-name" class="col-form-label">Login:</label>
-                      <input type="text" class="form-control" id="login"></input>
+                      <label for="loginInput" class="col-form-label">Login:</label>
+                      <input type="text" class="form-control" id="loginInput" required></input>
                     </div>
                     <div class="form-group">
-                      <label for="recipient-password" class="col-form-label">Hasło:</label>
-                      <input type="password" class="form-control" id="password"></input>
+                      <label for="passwordInput" class="col-form-label">Hasło:</label>
+                      <input type="password" class="form-control" id="passwordInput" required></input>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                  <button onclick="login()" type="button" class="btn btn-primary">Zaloguj się</button>
+                  <button type="button" class="btn btn-primary" id="loginButton">Zaloguj się</button>
                 </div>
               </div>
             </div>
         </div>
-    
-        <!--
-        <div class="index">
-            <input type="text" id="productName" placeholder="Nazwa produktu">
-            <input type="number" id="productQuantity" placeholder="Ilość">
-            <input type="number" id="productPrice" placeholder="Cena">
-            <input type="text" id="productType" placeholder="Typ">
-            <button onclick="addProduct()">Dodaj produkt</button>
-
-
-            <h4 id="legend">Nazwa - ilość - cena - typ</h4>
-            <ul id="productList">
-                {% for product in products %}
-                <li>
-                    <span>{{ product.name }} - {{ product.quantity }} - {{ product.price }} - {{ product.type }}</span>
-                    <div class="button-container">
-                        <button class="modifyButton" onclick="deleteProduct({{ product.id }})">Usuń</button>
-                        <button class="modifyButton" onclick="modifyProduct({{ product.id }})">Edytuj</button>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        -->
-
     </div>
     <script src="/static/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

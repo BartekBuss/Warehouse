@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Magazyn</title>
+        <link rel="stylesheet" href="/static/styles.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="index">
+                <input type="text" id="productName" placeholder="Nazwa produktu">
+                <input type="number" id="productQuantity" placeholder="Ilość">
+                <input type="number" id="productPrice" placeholder="Cena">
+                <input type="text" id="productType" placeholder="Typ">
+                <button onclick="addProduct()">Dodaj produkt</button>
+
+
+                <h4 id="legend">Nazwa - ilość - cena - typ</h4>
+                <ul id="productList">
+                    {% for product in products %}
+                    <li>
+                        <span>{{ product.name }} - {{ product.quantity }} - {{ product.price }} - {{ product.type }}</span>
+                        <div class="button-container">
+                            <button class="modifyButton" onclick="deleteProduct(${product.id})">Usuń</button>
+                            <button class="modifyButton" onclick="modifyProduct(${product.id})">Edytuj</button>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <script src="/static/script.js"></script>
+    </body>
+</html>
